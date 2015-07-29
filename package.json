@@ -1,0 +1,29 @@
+{
+  "name": "bulkchain",
+  "version": "1.0.0",
+  "description": "node based utilities for blockchain systems integration",
+  "main": "main.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/_mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m0dul0/bulkchain.git"
+  },
+  "keywords": [
+    "bitcoin",
+    "blockchain",
+    "node",
+    "async",
+    "bulkchain"
+  ],
+  "author": "m0dul0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m0dul0/bulkchain/issues"
+  },
+  "homepage": "https://github.com/m0dul0/bulkchain",
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  }
+}
