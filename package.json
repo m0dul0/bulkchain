@@ -25,5 +25,8 @@
   "homepage": "https://github.com/m0dul0/bulkchain",
   "devDependencies": {
     "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "bitcoin": "^2.4.0"
   }
 }
