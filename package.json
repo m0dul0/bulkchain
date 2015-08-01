@@ -12,9 +12,9 @@
   },
   "keywords": [
     "bitcoin",
+    "node-bitcoin",
     "blockchain",
     "node",
-    "async",
     "bulkchain"
   ],
   "author": "m0dul0",
@@ -27,9 +27,8 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
-    "async": "^1.4.0",
     "bitcoin": "^2.4.0",
-    "moment": "^2.10.6",
+    "winston": "^1.0.1",
     "yargs": "^3.15.0"
   }
 }
