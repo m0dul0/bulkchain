@@ -16,39 +16,80 @@ suite('bulkchain:', function(done) {
         done( e )
       }
     }
-    test('getBlockCount', function (done) {
-        bulkchain.getBlockCount(function (blockcount) {
-            assert(blockcount > 363312)
-            done()
-        })
-    });
-    test('dateToBlockCount (pre-satoshi targetdate)', function (done) {
-        bulkchain.dateToBlockCount(100, function (blockcount) {
-            assert(blockcount < 363312)
-            done()
-        })
-    });
-    test('dateToBlockCount (magic)', function (done) {
-        bulkchain.dateToBlockCount(1435734000, function (blockcount) {
-            assert(blockcount = 363313)
-            done()
-        })
-    });
     
-    test('getBlock (magic)', function (done) {
-        var blockhash = '00000000000000000bb70c518539844d0b35b30c2c785413881c0de37eb00d38'
-        bulkchain.getBlock(blockhash, function (block) {
-            assert.equal(blockhash, block.hash)
+    test('getBlockCount', function(done) {
+        bulkchain.getBlockCount( function client_getblockcount (err, blockcount) {
+            assert(blockcount !== undefined)
             done()
         })
     })
     
-    test('getBlockTime (magic numbers)', function (done) {
+    test('blockCountToBlockHash', function (done) {
+        bulkchain.blockCountToBlockHash(363312, cb_blockCountToBlockHash)
+        function cb_blockCountToBlockHash(err, blockhash) {
+            assert.equal ( blockhash,'000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894')
+            done()
+        }
+    })
+    
+    test('blockHashToBlockHeader (magic)', function (done) {
         var blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894'
-        bulkchain.getBlockTime(blockhash, function (blocktime) {
-            assert.equal(blocktime, 1435733095)
+        bulkchain.blockHashToBlockHeader(blockhash, cb_getBlock) 
+        function cb_getBlock(err, blockheader) {
+            assert.equal(blockheader.hash, '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894')
+            done()
+        }
+    })
+    
+    test('blockCountToTime (magic)', function (done) {
+        var blockcount = 367640
+        bulkchain.blockCountToTime(blockcount, cb_blockCountToTime) 
+        function cb_blockCountToTime(err, time) {
+            assert.equal(time, 1438263884)
+            done()
+        }
+    })
+    test('latestBlockTime', function (done) {
+        bulkchain.latestBlockTime(function (latestblocktime) {
+            assert(latestblocktime > 368329)
             done()
         })
+    })
+
+    test('dateToBlockCount (pre-genesis)', function (done) {
+        var targettime = 100
+        bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
+        function cb_dateToBlockcount (err, blockcount) {
+            assert(blockcount < 363312)
+            done()
+        }
+     })
+    
+    test('dateToBlockCount (post-apocalypse)', function (done) {
+        var targettime = 9999999999
+        bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
+        function cb_dateToBlockcount (err, blockcount) {
+            assert(blockcount > 363312)
+            done()
+        }
+    })
+    
+    test('dateToBlockCount (targettime == blocktime)', function (done) {
+        var targettime = 1438656758
+        bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
+        function cb_dateToBlockcount (err, blockcount) {
+            assert(blockcount = 368329)
+            done()
+        }
+    })
+    
+    test('dateToBlockCount (targettime != blocktime)', function (done) {
+        var targettime = 1438656757
+        bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
+        function cb_dateToBlockcount (err, blockcount) {
+            assert(blockcount = 368329)
+            done()
+        }
     })
 })
 
