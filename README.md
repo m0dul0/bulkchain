@@ -6,10 +6,10 @@ start your bitcoind:
 ``` bitcoind --daemon [--txindex]```  
 
 
-install bulkchain:  
-```git clone https://github.com/m0dul0/bulkchain.git
-cd bulkchain
-npm install
+install bulkchain:
+```git clone https://github.com/m0dul0/bulkchain.git  
+cd bulkchain  
+npm install  
 npm test```  
 
 ### usage:
