@@ -26,5 +26,5 @@ node based utilities for systems integration
 ```
     var bulkchain = require(process.cwd() + '/lib/bulkchain.js')
 ```  
-    appeal to bulkchain-test.js for examples.  
+appeal to bulkchain-test.js for examples.  
 
