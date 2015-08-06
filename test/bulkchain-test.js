@@ -31,7 +31,6 @@ suite('bulkchain:', function(done) {
             done()
         }
     })
-
     test('blockHashToBlockHeader (magic)', function (done) {
         var blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894'
         bulkchain.blockHashToBlockHeader(blockhash, cb_getBlock)
@@ -40,7 +39,6 @@ suite('bulkchain:', function(done) {
             done()
         }
     })
-
     test('blockCountToTime (magic)', function (done) {
         var blockcount = 367640
         bulkchain.blockCountToTime(blockcount, cb_blockCountToTime)
@@ -55,7 +53,6 @@ suite('bulkchain:', function(done) {
             done()
         })
     })
-
     test('dateToBlockCount (pre-genesis)', function (done) {
         var targettime = 100
         bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
@@ -64,7 +61,6 @@ suite('bulkchain:', function(done) {
             done()
         }
      })
-
     test('dateToBlockCount (post-apocalypse)', function (done) {
         var targettime = 9999999999
         bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
@@ -73,7 +69,6 @@ suite('bulkchain:', function(done) {
             done()
         }
     })
-
     test('dateToBlockCount (targettime == blocktime)', function (done) {
         var targettime = 1438656758
         bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
@@ -82,7 +77,6 @@ suite('bulkchain:', function(done) {
             done()
         }
     })
-
     test('dateToBlockCount (targettime != blocktime)', function (done) {
         var targettime = 1438656757
         bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
@@ -91,7 +85,6 @@ suite('bulkchain:', function(done) {
             done()
         }
     })
-    
     test('dateRangeToBlockHash (targettime == blocktime)', function (done) {
         var starttime = 1438825753 // 368590
         var endtime =   1438830991  //368596
@@ -101,16 +94,22 @@ suite('bulkchain:', function(done) {
             done()
         }
     })
-    
-    test('dateRangeToBlockHash (targettime != blocktime)', function (done) {
-        var starttime = 1438825700 // 368590
-        var endtime =   1438830900  //368596
+    test('dateRangeToBlockHash (time trial 1 day)', function (done) {
+        var starttime = 1436943600 // date -j -f %Y%m%d%H%M%S 20150715000000 +%s
+        var endtime =   1437030000 // date -j -f %Y%m%d%H%M%S 20150716000000 +%s
         bulkchain.dateRangeToBlockHash(starttime, endtime, cb_dateRangeToBlockHash)
         function cb_dateRangeToBlockHash (blockhasharr) {
-            assert.equal(blockhasharr.length, 7)
+            assert(blockhasharr)
             done()
         }
     })
-
+    test('blockHashToTxid (magic)', function (done) {
+        var blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894'
+        bulkchain.blockHashToTxid(blockhash, cb_blockHashToTxid)
+        function cb_blockHashToTxid(err, txid) {
+            assert.equal(txid.length, 1004)
+            done()
+        }
+    })
 })
 

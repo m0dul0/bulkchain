@@ -1,5 +1,5 @@
 --ui=tdd
---timeout 5000
+--timeout 360000
 --reporter=spec
 --growl
 
