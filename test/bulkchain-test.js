@@ -111,5 +111,13 @@ suite('bulkchain:', function(done) {
             done()
         }
     })
+    test('txidToRawTransaction (magic)', function (done) {
+        var txid = '4eb45cc8a5f1599867ed30b6aab5f9318466d17d5ebfb1adcd865bfb90a298b0'
+        bulkchain.txidToRawTransaction(txid, cb_txidToRawTransaction)
+        function cb_txidToRawTransaction(err, rawtransaction) {
+            assert.equal(rawtransaction.txid, '4eb45cc8a5f1599867ed30b6aab5f9318466d17d5ebfb1adcd865bfb90a298b0')
+            done()
+        }
+    })
 })
 
