@@ -1,7 +1,7 @@
 # bulkchain
 node based utilities for systems integration
 
-### installation
+## installation
 ####start your bitcoind
 ```
     bitcoind --daemon [--txindex]  
@@ -17,14 +17,13 @@ node based utilities for systems integration
 ```
     cp ./config/options.js.example ./config/options.js
 ```  
-####behold your bounty
+####test
 ```  
     npm test  
 ```
-### usage
-####library
+## usage
+###library
 ```
     var bulkchain = require(process.cwd() + '/lib/bulkchain.js')
 ```  
 examples in test suite [bulkchain-test.js](https://github.com/m0dul0/bulkchain/blob/master/test/bulkchain-test.js) 
-
