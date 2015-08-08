@@ -142,6 +142,7 @@ suite('bulkchain:', function(done) {
             assert.equal(transactionsignature.vout_count, rawtransaction.vout.length)
             assert.equal(transactionsignature.vin_value_concat.length, rawtransaction.vin.length)
             assert.equal(transactionsignature.vin_satoshi_sum, 3736698)
+            assert.equal(transactionsignature.miningfee, 10000)
             done()
         }
     })
