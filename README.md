@@ -18,4 +18,5 @@ node based utilities for systems integration
 (plenty of library examples in the test suite [bulkchain-test.js](https://github.com/m0dul0/bulkchain/blob/master/test/bulkchain-test.js))  
 ###bulkchain-cli
     ./bulkchain-cli.js datetoblockcount --targetdate `date -j -f %Y%m%d%H%M%S 20150701000000 +%s`  
+    ./bulkchain-cli.js datetoblockhash --startdate `date -j -f %Y%m%d%H%M%S 20150701000000 +%s` --enddate `date -j -f %Y%m%d%H%M%S 20150702000000 +%s`
 
