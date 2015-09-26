@@ -3,3 +3,4 @@ config/options.js
 node_modules
 out
 test/bulkchain-timetrials.js
+.idea
