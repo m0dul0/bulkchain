@@ -48,7 +48,7 @@ var argv = yargs
               }
           })
           .demand('startdate', 'enddate')
-          .example('$0 datetoblockhash --startdate `date -j -f %Y%m%d%H%M%S 20150701000000 +%s` --enddate `date -j -f %Y%m%d%H%M%S 20150702000000 +%s`', 'get all blockhashes on July 1 local timezone')
+          .example('$0 dateRangeToTransactionSignature --startdate `date -j -f %Y%m%d%H%M%S 20150701000000 +%s` --enddate `date -j -f %Y%m%d%H%M%S 20150702000000 +%s`', 'get all blockhashes on July 1 local timezone')
           .help('help')
           .argv
       })

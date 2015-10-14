@@ -4,3 +4,9 @@ node_modules
 out
 test/bulkchain-timetrials.js
 .idea
+201509010200_bulkchain.json
+bulkchain.log
+scratch.json
+stage_transaction_signature/
+status.html
+
