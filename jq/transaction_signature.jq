@@ -1,5 +1,3 @@
-map(.[]) 
-|
 map({
     "version": .version,
     "txid": .txid ,
