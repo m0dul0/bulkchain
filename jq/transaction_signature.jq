@@ -12,7 +12,7 @@ map({
     "vout_value_concat": .vout_value_concat,
     "vin_value_concat": .vin_value_concat,
     "vin_satoshi_sum": .vin_satoshi_sum,
-    "vin_satoshisecondsdestroyed_concat": .vin_satoshisecondsdestroyed_concat,
+    "satoshi_seconds_destroyed": .satoshi_seconds_destroyed,
     "satoshi_seconds_destroyed_sum": .satoshi_seconds_destroyed_sum,
     "miningfee": .miningfee,
     "vin_satoshi_mean": .vin_satoshi_mean,
