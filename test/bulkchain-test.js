@@ -172,11 +172,14 @@ suite('bulkchain:', function(done) {
         }
     })
 
-    test('dateRangeToTransactionSignature (time trial 1 day)', function (done) {
+    test('dateRangeToTransactionSignature (time trial 1 block)', function (done) {
         this.timeout(1200000);
+        
+        var starttime = 1441453061
+        var endtime = 1441453062
         //linux shell takes time 348971ms
-        var starttime = 1441098000 // date --date "2015-09-01 02:00:00" +%s
-        var endtime =   1441099800 // date --date "2015-09-01 02:30:00" +%s
+        //var starttime = 1441090800 // date --date "2015-09-01 00:00:00" +%s
+        //var endtime =   1441177200 // date --date "2015-09-02 00:00:00" +%s
         // OSX 
         //         var starttime = 1436943600 // date -j -f %Y%m%d%H%M%S 20150715000000 +%s
         //         var endtime =   1437030000 // date -j -f %Y%m%d%H%M%S 20150716000000 +%s
