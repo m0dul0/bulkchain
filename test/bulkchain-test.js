@@ -126,7 +126,8 @@ suite('bulkchain:', function(done) {
             done()
         }
     })
-    test('txidToRawTransaction (block reward)', function (done) {
+    test('txidToRawTransaction (magic)', function (done) {
+        this.timeout(200000);
         var txid = '8dabbf51f78c1e7286866af1de403118c5ddbe57ca93b54859245916d2bf1063'
         bulkchain.txidToRawTransaction(txid, cb_txidToRawTransaction)
         function cb_txidToRawTransaction(err, rawtransaction) {
@@ -171,22 +172,21 @@ suite('bulkchain:', function(done) {
             done()
         }
     })
-
-    test('dateRangeToTransactionSignature (time trial 1 block)', function (done) {
-        this.timeout(1200000);
-        
-        var starttime = 1441453061
-        var endtime = 1441453062
-        //linux shell takes time 348971ms
-        //var starttime = 1441090800 // date --date "2015-09-01 00:00:00" +%s
-        //var endtime =   1441177200 // date --date "2015-09-02 00:00:00" +%s
-        // OSX 
-        //         var starttime = 1436943600 // date -j -f %Y%m%d%H%M%S 20150715000000 +%s
-        //         var endtime =   1437030000 // date -j -f %Y%m%d%H%M%S 20150716000000 +%s
-        bulkchain.dateRangeToTransactionSignature(starttime, endtime, cb_dateRangeToTransactionSignature)
-        function cb_dateRangeToTransactionSignature (transactionSignatureArr) {
-            assert(transactionSignatureArr)
-            done()
-        }
-    });
+//    test('dateRangeToTransactionSignature (time trial 1 block)', function (done) {
+//        this.timeout(1200000);
+//        
+//        var starttime = 1441453061
+//        var endtime = 1441453062
+//        //linux shell takes time 348971ms
+//        //var starttime = 1441090800 // date --date "2015-09-01 00:00:00" +%s
+//        //var endtime =   1441177200 // date --date "2015-09-02 00:00:00" +%s
+//        // OSX 
+//        //         var starttime = 1436943600 // date -j -f %Y%m%d%H%M%S 20150715000000 +%s
+//        //         var endtime =   1437030000 // date -j -f %Y%m%d%H%M%S 20150716000000 +%s
+//        bulkchain.dateRangeToTransactionSignature(starttime, endtime, cb_dateRangeToTransactionSignature)
+//        function cb_dateRangeToTransactionSignature (transactionSignatureArr) {
+//            assert(transactionSignatureArr)
+//            done()
+//        }
+//    });
 })
