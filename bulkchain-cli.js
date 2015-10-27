@@ -77,7 +77,16 @@ if (argv._[0] === 'datetoblockhash') {
 }
 
 if (argv._[0] === 'datetotransactionsignature') {
-    bulkchain.dateRangeToTransactionSignature(argv.startdate, argv.enddate, function (transactionSignatureArr) {
-        console.log(JSON.stringify(transactionSignatureArr))
-    })
+    
+    var iterator = foo();
+    console.log(iterator.next()); // { value: 0, done: false }
+    console.log(iterator.next()); // { value: 1, done: false }
+    console.log(iterator.next()); // { value: 2, done: false }
+    console.log(iterator.next()); // { value: undefined, done: true }
+    var interator = bulkchain.dateRangeToTransactionSignature(argv.startdate, argv.enddate)
+    signatureItem = iterator.next()
+    while ( signatureItem.done === false ) {
+        console.log(JSON.stringify(signatureItem))
+        signatureItem = iterator.next();
+    }
 }
