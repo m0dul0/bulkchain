@@ -17,7 +17,7 @@ suite('bitcoin-server:', function(done) {
     var config = require(__dirname + '/../config/options.js');
     var assert = require("assert");
     
-    var bitcoin = require('bitcoin')
+    var bitcoin = require('bitcoin-promise')
 
     var client = new bitcoin.Client({
       host: config.bitcoind_host,
