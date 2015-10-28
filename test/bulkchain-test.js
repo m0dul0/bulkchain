@@ -25,14 +25,11 @@ suite('bulkchain:', function(done) {
         var blockcount = bulkchain.getBlockCount;
         return expect(blockcount).to.eventually.not.equal(undefined);
     });
-    // test('blockCountToBlockHash', function (done) {
-    //     bulkchain.blockCountToBlockHash(363312, cb_blockCountToBlockHash)
-    //     function cb_blockCountToBlockHash(err, blockhash) {
-    //         assert.equal ( blockhash,'000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894')
-    //         done()
-    //     }
-    // });
-    
+    test('blockCountToBlockHash', function () {
+        var blockhash = bulkchain.blockCountToBlockHash(363312);
+        return expect(blockhash).to.eventually.equal('000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894');
+        }
+    });
 //     // OLD ***************** callbacks
 
 
