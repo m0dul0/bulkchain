@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/m0dul0/bulkchain",
   "devDependencies": {
+    "chai-as-promised": "^5.1.0",
     "mocha": "^2.2.5"
   },
   "dependencies": {
