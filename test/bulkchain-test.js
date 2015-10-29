@@ -10,8 +10,7 @@ suite('bulkchain:', function(done) {
     var expect = chai.expect;
     var chaiAsPromised = require('chai-as-promised');
     chai.use(chaiAsPromised);
-    
-    // NEW ***************** promises
+
     test('getBlockCount', function() {
         var blockcount = bulkchain.getBlockCount;
         return expect(blockcount).to.eventually.not.equal(undefined);
@@ -21,44 +20,36 @@ suite('bulkchain:', function(done) {
         var blockhash = bulkchain.blockCountToBlockHash(blockcount);
         return expect(blockhash).to.eventually.equal('000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894');
     });
-    test('blockHashToBlockHeader (not null)', function () {
+    test('blockHashToBlockHeader (magic)', function () {
         let blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894';
         var blockheader = bulkchain.blockHashToBlockHeader(blockhash);
         return expect(blockheader).to.eventually.not.equal(undefined);
     });
+    test('blockCountToTime (magic)', function () {
+        let blockcount = 367640
+        var time = bulkchain.blockCountToTime(blockcount);
+        return expect(time).to.eventually.equal(1438263884);
+    });
+    test('latestBlockTime', function () {
+        var latestblocktime = bulkchain.latestBlockTime();
+        return expect(latestblocktime).to.eventually.be.above(368329);
+    });
+    test('dateToBlockCount (pre-genesis)', function () {
+        var targettime = 100
+        var blockcount = bulkchain.dateToBlockCount(targettime);
+        return expect(blockcount).to.eventually.be.below(363312);
+    })
+
 //     // OLD ***************** callbacks
 
-
-//     test('blockHashToBlockHeader (magic)', function (done) {
-//         var blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894'
-//         bulkchain.blockHashToBlockHeader(blockhash, cb_getBlock)
-//         function cb_getBlock(err, blockheader) {
-//             assert.equal(blockheader.hash, '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894')
-//             done()
-//         }
-//     })
-//     test('blockCountToTime (magic)', function (done) {
-//         var blockcount = 367640
-//         bulkchain.blockCountToTime(blockcount, cb_blockCountToTime)
-//         function cb_blockCountToTime(err, time) {
-//             assert.equal(time, 1438263884)
-//             done()
-//         }
-//     })
-//     test('latestBlockTime', function (done) {
-//         bulkchain.latestBlockTime(function (latestblocktime) {
-//             assert(latestblocktime > 368329)
-//             done()
-//         })
-//     })
-//     test('dateToBlockCount (pre-genesis)', function (done) {
-//         var targettime = 100
-//         bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
-//         function cb_dateToBlockcount (err, blockcount) {
-//             assert(blockcount < 363312)
-//             done()
-//         }
-//     })
+    // test('dateToBlockCount (pre-genesis)', function (done) {
+    //     var targettime = 100
+    //     bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
+    //     function cb_dateToBlockcount (err, blockcount) {
+    //         assert(blockcount < 363312)
+    //         done()
+    //     }
+    // })
 //     test('dateToBlockCount (post-apocalypse)', function (done) {
 //         var targettime = 9999999999
 //         bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
