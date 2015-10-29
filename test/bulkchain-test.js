@@ -11,24 +11,20 @@ suite('bulkchain:', function(done) {
     var chaiAsPromised = require('chai-as-promised');
     chai.use(chaiAsPromised);
     
-    function check( done, f ) {
-      try {
-        f()
-        done()
-      } catch( e ) {
-        done( e )
-      }
-    }
-    
     // NEW ***************** promises
     test('getBlockCount', function() {
         var blockcount = bulkchain.getBlockCount;
         return expect(blockcount).to.eventually.not.equal(undefined);
     });
     test('blockCountToBlockHash', function () {
-        var blockhash = bulkchain.blockCountToBlockHash(363312);
+        let blockcount = 363312;
+        var blockhash = bulkchain.blockCountToBlockHash(blockcount);
         return expect(blockhash).to.eventually.equal('000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894');
-        }
+    });
+    test('blockHashToBlockHeader (not null)', function () {
+        let blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894';
+        var blockheader = bulkchain.blockHashToBlockHeader(blockhash);
+        return expect(blockheader).to.eventually.not.equal(undefined);
     });
 //     // OLD ***************** callbacks
 
