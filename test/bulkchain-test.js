@@ -31,7 +31,7 @@ suite('bulkchain:', function(done) {
         return expect(time).to.eventually.equal(1438263884);
     });
     test('latestBlockTime', function () {
-        var latestblocktime = bulkchain.latestBlockTime();
+        var latestblocktime = bulkchain.latestBlockTime;
         return expect(latestblocktime).to.eventually.be.above(368329);
     });
     test('dateToBlockCount (pre-genesis)', function () {
