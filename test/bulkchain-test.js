@@ -43,18 +43,15 @@ suite('bulkchain:', function(done) {
         var targettime = 9999999999
         var blockcount = bulkchain.dateToBlockCount(targettime);
         return expect(blockcount).to.eventually.be.above(363312);
+    });
+    test('dateToBlockCount (targettime == blocktime)', function () {
+        var targettime = 1438656758
+        var blockcount = bulkchain.dateToBlockCount(targettime);
+        return expect(blockcount).to.eventually.equal(368329);
     })
 
 //     // OLD ***************** callbacks
 
-//     test('dateToBlockCount (post-apocalypse)', function (done) {
-//         var targettime = 9999999999
-//         bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
-//         function cb_dateToBlockcount (err, blockcount) {
-//             assert(blockcount > 363312)
-//             done()
-//         }
-//     })
 //     test('dateToBlockCount (targettime == blocktime)', function (done) {
 //         var targettime = 1438656758
 //         bulkchain.dateToBlockCount(targettime, cb_dateToBlockcount)
