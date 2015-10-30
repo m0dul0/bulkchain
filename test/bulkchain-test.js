@@ -62,35 +62,29 @@ suite('bulkchain:', function(done) {
         return expect(blockhashArr).to.eventually.have.length(6);
     });
     test('dateRangeToBlockHash (time trial 1 day)', function () {
-        var starttime = 1436943600;// date -j -f %Y%m%d%H%M%S 20150715000000 +%s
-        var endtime =   1437030000;// date -j -f %Y%m%d%H%M%S 20150716000000 +%s
+        let starttime = 1436943600;// date -j -f %Y%m%d%H%M%S 20150715000000 +%s
+        let endtime =   1437030000;// date -j -f %Y%m%d%H%M%S 20150716000000 +%s
         var blockhashArr = bulkchain.dateRangeToBlockHash(starttime, endtime);
         return expect(blockhashArr).to.eventually.have.length(160);
-    })
+    });
     test('blockHashToTxid (magic)', function () {
-        var blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894';
+        let blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894';
         var txidArr = bulkchain.blockHashToTxid(blockhash);
         return expect(txidArr).to.eventually.have.length(1004);
-    })
+    });
+    test('blockHashToTxid (magic)', function () {
+        let blockhash = '000000000000000012d5e815d36764cc0c7d7e2b0f7716af92c285aebe40eeed';
+        var txidArr = bulkchain.blockHashToTxid(blockhash);
+        return expect(txidArr).to.eventually.have.length(1256);
+    });
+    test('txidToRawTransaction (block reward)', function () {
+        let txid = '4eb45cc8a5f1599867ed30b6aab5f9318466d17d5ebfb1adcd865bfb90a298b0';
+        var rawtransaction = bulkchain.txidToRawTransaction(txid);
+        return expect(rawtransaction).to.eventually.not.equal(undefined);
+    });
 
 //     // OLD ***************** callbacks
     
-//     test('blockHashToTxid (magic)', function (done) {
-//         var blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894'
-//         bulkchain.blockHashToTxid(blockhash, cb_blockHashToTxid)
-//         function cb_blockHashToTxid(err, txid) {
-//             assert.equal(txid.length, 1004)
-//             done()
-//         }
-//     })
-//     test('blockHashToTxid (magic)', function (done) {
-//         var blockhash = '000000000000000012d5e815d36764cc0c7d7e2b0f7716af92c285aebe40eeed'
-//         bulkchain.blockHashToTxid(blockhash, cb_blockHashToTxid)
-//         function cb_blockHashToTxid(err, txid) {
-//             assert.equal(txid.length, 1256)
-//             done()
-//         }
-//     })
 //     test('txidToRawTransaction (block reward)', function (done) {
 //         var txid = '4eb45cc8a5f1599867ed30b6aab5f9318466d17d5ebfb1adcd865bfb90a298b0'
 //         bulkchain.txidToRawTransaction(txid, cb_txidToRawTransaction)
