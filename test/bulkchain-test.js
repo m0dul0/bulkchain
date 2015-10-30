@@ -59,21 +59,17 @@ suite('bulkchain:', function(done) {
         let starttime = 1438825753 // 368590 Wed Aug  5 18:49:13 PDT 2015
         let endtime =   1438830991  //368596 Wed Aug  5 20:16:32 PDT 2015
         var blockhashArr = bulkchain.dateRangeToBlockHash(starttime, endtime)
-        return expect(blockhashArr.length).to.eventually.equal(6);
+        return expect(blockhashArr).to.eventually.have.length(6);
     });
+    test('dateRangeToBlockHash (time trial 1 day)', function () {
+        var starttime = 1436943600 // date -j -f %Y%m%d%H%M%S 20150715000000 +%s
+        var endtime =   1437030000 // date -j -f %Y%m%d%H%M%S 20150716000000 +%s
+        var blockhashArr = bulkchain.dateRangeToBlockHash(starttime, endtime)
+        return expect(blockhashArr).to.eventually.have.length(160);
+    })
 
 //     // OLD ***************** callbacks
-
-
-//     test('dateRangeToBlockHash (targettime == blocktime)', function (done) {
-//         var starttime = 1438825753 // 368590 Wed Aug  5 18:49:13 PDT 2015
-//         var endtime =   1438830991  //368596 Wed Aug  5 20:16:32 PDT 2015
-//         bulkchain.dateRangeToBlockHash(starttime, endtime, cb_dateRangeToBlockHash)
-//         function cb_dateRangeToBlockHash (blockhasharr) {
-//             assert.equal(blockhasharr.length, 6)
-//             done()
-//         }
-//     })
+    
 //     test('dateRangeToBlockHash (time trial 1 day)', function (done) {
 //         var starttime = 1436943600 // date -j -f %Y%m%d%H%M%S 20150715000000 +%s
 //         var endtime =   1437030000 // date -j -f %Y%m%d%H%M%S 20150716000000 +%s
