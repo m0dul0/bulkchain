@@ -3,7 +3,7 @@
 'use strict';
 
 var yargs = require('yargs');
-var bulkchain = require(process.cwd() + '/lib/bulkchain.js')
+var bulkchain = require(process.cwd() + '/lib/bulkchain.js');
 
 var argv = yargs
     .usage('\nUsage: $0 <command> [options]')
@@ -17,15 +17,15 @@ var argv = yargs
         .demand('targetdate')
         .example('$0 datetoblockcount --targetdate `date -j -f %Y%m%d%H%M%S 20150701000000 +%s`', 'get blockcount on July 1 local timezone')
         .help('help')
-        .argv
+        .argv;
       })
       .command('datetoblockhash', 'get block hashes between startdate and enddate', function (yargs) {
           argv = yargs.options({
           startdate: {
               description: "date in unixtime (+%s)\nexamples:\n`date +%s`\n`date -j -f %Y%m%d%H%M%S 20150701000000 +%s`", 
               requiresArg: true,
-              }
-          ,enddate: {
+              },
+          enddate: {
               description: "date in unixtime (+%s)\nexamples:\n`date +%s`\n`date -j -f %Y%m%d%H%M%S 20150702000000 +%s`", 
               requiresArg: true,
               }
@@ -33,7 +33,7 @@ var argv = yargs
           .demand('startdate', 'enddate')
           .example('$0 datetoblockhash --startdate `date -j -f %Y%m%d%H%M%S 20150701000000 +%s` --enddate `date -j -f %Y%m%d%H%M%S 20150702000000 +%s`', 'get all blockhashes on July 1 local timezone')
           .help('help')
-          .argv
+          .argv;
         })
       
       .command('datetotransactionsignature', 'get transaction level signatures between startdate and enddate', function (yargs) {
@@ -41,8 +41,8 @@ var argv = yargs
               startdate: {
                   description: "date in unixtime (+%s)\nexamples:\n`date +%s`\n`date -j -f %Y%m%d%H%M%S 20150701000000 +%s`", 
                                requiresArg: true,
-              }
-              ,enddate: {
+              },
+              enddate: {
                   description: "date in unixtime (+%s)\nexamples:\n`date +%s`\n`date -j -f %Y%m%d%H%M%S 20150702000000 +%s`", 
                                requiresArg: true,
               }
@@ -50,7 +50,7 @@ var argv = yargs
           .demand('startdate', 'enddate')
           .example('$0 dateRangeToTransactionSignature --startdate `date -j -f %Y%m%d%H%M%S 20150701000000 +%s` --enddate `date -j -f %Y%m%d%H%M%S 20150702000000 +%s`', 'get all blockhashes on July 1 local timezone')
           .help('help')
-          .argv
+          .argv;
       })
       
     .demand(1)
@@ -58,35 +58,29 @@ var argv = yargs
     .version('1.0.0', 'version').alias('version', 'V')
     .epilog('Help on commands:\nm0dul0: ./bulkchain-cli.js --help <command>')
     .argv;
-var config = require(__dirname + '/config/options.js');
+
 
 //console.dir(argv._)
 
 var shipOutput = function logToConsole (err, console_output) {
-    console.log(JSON.stringify(console_output))
-}
+    console.log(JSON.stringify(console_output));
+};
 
 if (argv._[0] === 'datetoblockcount') {
-    bulkchain.dateToBlockCount(argv.targetdate, shipOutput)
+    bulkchain.dateToBlockCount(argv.targetdate, shipOutput);
 }
 
 if (argv._[0] === 'datetoblockhash') {
     bulkchain.dateRangeToBlockHash(argv.startdate, argv.enddate, function (blockhashlist) {
-        console.log(JSON.stringify(blockhashlist))
-    })
+        console.log(JSON.stringify(blockhashlist));
+    });
 }
 
 if (argv._[0] === 'datetotransactionsignature') {
-    
-    var iterator = foo();
-    console.log(iterator.next()); // { value: 0, done: false }
-    console.log(iterator.next()); // { value: 1, done: false }
-    console.log(iterator.next()); // { value: 2, done: false }
-    console.log(iterator.next()); // { value: undefined, done: true }
-    var interator = bulkchain.dateRangeToTransactionSignature(argv.startdate, argv.enddate)
-    signatureItem = iterator.next()
+    var iterator = bulkchain.dateRangeToTransactionSignature(argv.startdate, argv.enddate);
+    var signatureItem = iterator.next();
     while ( signatureItem.done === false ) {
-        console.log(JSON.stringify(signatureItem))
+        console.log(JSON.stringify(signatureItem));
         signatureItem = iterator.next();
     }
 }
