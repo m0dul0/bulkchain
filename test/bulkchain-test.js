@@ -48,16 +48,6 @@ suite('bulkchain:', function(done) {
         var blockhashArr = bulkchain.dateRangeToBlockHash(starttime, endtime);
         return expect(blockhashArr).to.eventually.have.length(160);
     });
-    test('blockHashToTxid (magic)', function () {
-        let blockhash = '000000000000000004c7154fec6527603c642b3622803c7de06dd18ec56e4894';
-        var txidArr = bulkchain.blockHashToTxid(blockhash);
-        return expect(txidArr).to.eventually.have.length(1004);
-    });
-    test('blockHashToTxid (magic)', function () {
-        let blockhash = '000000000000000012d5e815d36764cc0c7d7e2b0f7716af92c285aebe40eeed';
-        var txidArr = bulkchain.blockHashToTxid(blockhash);
-        return expect(txidArr).to.eventually.have.length(1256);
-    });
     test('txidToOutputArr (magic)', function () {
         let txid = '25d4deffa4ac3b239565804decdde7c91eae489330a746ea486a3e0bdb3214b0';
         var outputArr = bulkchain.txidToOutputArr(txid);
