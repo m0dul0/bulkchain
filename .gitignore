@@ -10,3 +10,16 @@ scratch.json
 stage_transaction_signature/
 status.html
 
+jq/example_transaction_signature.json
+jq/sort_by_avg_input_size.jq
+jq/summary.jq
+jq/summary_block.jq
+jq/summary_transaction_signature.jq
+lib/bulkchain_old.js
+lib/cryptogrind_private_key.txt
+lib/dim_stats.js
+lib/dim_time.js
+october_batch.sh
+summary.jq
+test/bulkchain-test_old.js
+

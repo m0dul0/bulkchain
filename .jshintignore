@@ -1,3 +1,8 @@
 test
 node_modules
 /config/options.js
+/out
+/lib/dim_time.js
+/lib/bulkchain_old.js
+/lib/dim_stats.js
+
