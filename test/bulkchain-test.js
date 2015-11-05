@@ -24,7 +24,7 @@ suite('bulkchain:', function(done) {
     test('dateToBlockCount (pre-genesis)', function () {
         let targettime = 100;
         var blockcount = bulkchain.dateToBlockCount(targettime);
-        return expect(blockcount).to.eventually.not.equal(undefined);
+        return expect(blockcount).to.eventually.equal(1);
     });
     // test('dateToBlockCount (post-apocalypse)', function () {
     //     let targettime = 9999999999;
