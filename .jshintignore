@@ -5,4 +5,4 @@ node_modules
 /lib/dim_time.js
 /lib/bulkchain_old.js
 /lib/dim_stats.js
-
+scratch.js
