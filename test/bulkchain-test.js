@@ -106,9 +106,12 @@ suite('bulkchain:', (done) => {
         this.timeout(1200000);
         let starttime = 1438825753; // 368590 Wed Aug  5 18:49:13 PDT 2015
         let endtime =   1438830991;  //368596 Wed Aug  5 20:16:32 PDT 2015
-        var transactionSignatureArrLength = bulkchain.dateRangeToTransactionSignature(starttime, endtime )
-            .then((transactionSignatureArr) => transactionSignatureArr.length)
-        return expect(transactionSignatureArrLength).to.eventually.be.above(0);
+        var transactionSignatureArr = bulkchain.dateRangeToTransactionSignature(starttime, endtime )
+        .then((transactionSignatureArr) => {
+            console.log(transactionSignatureArr);
+            return transactionSignatureArr
+        });
+        return expect(transactionSignatureArr).to.eventually.be.above(0);
    
         //linux shell takes time 348971ms
         //var starttime = 1441090800 // date --date "2015-09-01 00:00:00" +%s
