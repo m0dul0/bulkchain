@@ -6,3 +6,5 @@ node_modules
 /lib/bulkchain_old.js
 /lib/dim_stats.js
 scratch.js
+/lib/bulkchain_preBluebird.js
+scratch_snapshot_functional_20151113.js

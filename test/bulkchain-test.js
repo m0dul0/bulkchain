@@ -2,25 +2,28 @@
 
 process.env.NODE_ENV = 'test';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+var Promise = require('bluebird');
 
 suite('bulkchain:', (done) => {
 
     var bulkchain = require(process.cwd() + '/lib/bulkchain.js')
     var chai = require('chai');
     var expect = chai.expect;
-    var chaiAsPromised = require('chai-as-promised');
-    chai.use(chaiAsPromised);
 
     test('blockCountToTime (magic)', () =>  {
         let blockcount = 367640;
-        var time = bulkchain.blockCountToTime(blockcount);
-        return expect(time).to.eventually.equal(1438263884);
+        return (
+            Promise.any(bulkchain.blockCountToTime(blockcount))
+            .then((blocktime) => expect(blocktime.time).to.equal(1438263884))
+        )
     });
-    // test('dateToBlockCount (pre-genesis)', () =>  {
-    //     let targettime = 100;
-    //     var blockcount = bulkchain.dateToBlockCount(targettime);
-    //     return expect(blockcount).to.eventually.equal(1);
-    // });
+    test('dateToBlockCount (pre-genesis)', () =>  {
+        let targettime = 100;
+        return (
+            Promise.any(bulkchain.dateToBlockCount(targettime))
+            .then((blockcount) => expect(blockcount).to.equal(1))
+        )
+    });
     // test('dateToBlockCount (post-apocalypse)', () =>  {
     //     let targettime = 9999999999;
     //     var blockcount = bulkchain.dateToBlockCount(targettime);
