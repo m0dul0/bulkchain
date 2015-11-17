@@ -2,13 +2,14 @@
 
 process.env.NODE_ENV = 'test';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-var Promise = require('bluebird');
+
 
 suite('bulkchain:', (done) => {
 
     var bulkchain = require(process.cwd() + '/lib/bulkchain.js')
     var chai = require('chai');
     var expect = chai.expect;
+    var Promise = require('bluebird');
 
     test('blockCountToTime (magic)', () =>  {
         let blockcount = 367640;
@@ -17,6 +18,7 @@ suite('bulkchain:', (done) => {
             .then((blocktime) => expect(blocktime.time).to.equal(1438263884))
         )
     });
+    
     test('dateToBlockCount (pre-genesis)', () =>  {
         let targettime = 100;
         return (
