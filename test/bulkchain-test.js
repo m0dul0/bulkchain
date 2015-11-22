@@ -11,13 +11,13 @@ suite('bulkchain:', (done) => {
     var expect = chai.expect;
     var Promise = require('bluebird');
 
-    // test('blockCountToTime (magic)', () =>  {
-    //     let blockcount = 367640;
-    //     return (
-    //         Promise.any(bulkchain.blockCountToTime(blockcount))
-    //         .then((blocktime) => expect(blocktime.time).to.equal(1438263884))
-    //     )
-    // });
+    test('blockCountToTime (magic)', () =>  {
+        let blockcount = 367640;
+        return (
+            Promise.any(bulkchain.blockCountToTime(blockcount))
+            .then((blocktime) => expect(blocktime.time).to.equal(1438263884))
+        )
+    });
 
     test('timeToBlockCount (pre-genesis)', () =>  {
         let targettime = 100;
