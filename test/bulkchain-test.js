@@ -23,23 +23,26 @@ suite('bulkchain:', (done) => {
         let targettime = 100;
         return (
             Promise.any(bulkchain.timeToBlockCount(targettime))
-            .then((blockcount) => expect(blockcount).to.equal(1))
+            .then((blockcount) => {
+                console.log(blockcount, '############################');
+                expect(blockcount).to.equal(1)
+            })
         )
     });
-    test('timeToBlockCount (post-apocalypse)', () =>  {
-        let targettime = 9999999999;
-        return (
-            Promise.any(bulkchain.timeToBlockCount(targettime))
-            .then((blockcount) => expect(blockcount).to.be.above(363312))
-        )
-    });
-    test('timeToBlockCount (targettime == blocktime)', () =>  {
-        let targettime = 1438656758;
-        return (
-            Promise.any(bulkchain.timeToBlockCount(targettime))
-            .then((blockcount) => expect(blockcount).to.equal(368329))
-        )
-    });
+    // test('timeToBlockCount (post-apocalypse)', () =>  {
+    //     let targettime = 9999999999;
+    //     return (
+    //         Promise.any(bulkchain.timeToBlockCount(targettime))
+    //         .then((blockcount) => expect(blockcount).to.be.above(363312))
+    //     )
+    // });
+    // test('timeToBlockCount (targettime == blocktime)', () =>  {
+    //     let targettime = 1438656758;
+    //     return (
+    //         Promise.any(bulkchain.timeToBlockCount(targettime))
+    //         .then((blockcount) => expect(blockcount).to.equal(368329))
+    //     )
+    // });
     // test('timeToBlockCount (targettime != blocktime)', () =>  {
     //     let targettime = 1438656757;
     //     var blockcount = bulkchain.timeToBlockCount(targettime);
