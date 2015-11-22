@@ -29,13 +29,13 @@ suite('bulkchain:', (done) => {
             })
         )
     });
-    // test('timeToBlockCount (post-apocalypse)', () =>  {
-    //     let targettime = 9999999999;
-    //     return (
-    //         Promise.any(bulkchain.timeToBlockCount(targettime))
-    //         .then((blockcount) => expect(blockcount).to.be.above(363312))
-    //     )
-    // });
+    test('timeToBlockCount (post-apocalypse)', () =>  {
+        let targettime = 9999999999;
+        return (
+            Promise.any(bulkchain.timeToBlockCount(targettime))
+            .then((blockcount) => expect(blockcount).to.be.above(363312))
+        )
+    });
     // test('timeToBlockCount (targettime == blocktime)', () =>  {
     //     let targettime = 1438656758;
     //     return (
