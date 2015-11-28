@@ -18,7 +18,6 @@ suite('bulkchain:', (done) => {
             .then((blocktime) => expect(blocktime.time).to.equal(1438263884))
         )
     });
-
     test('timeToBlockCount (pre-genesis)', () =>  {
         let targettime = 100;
         return (
@@ -55,12 +54,21 @@ suite('bulkchain:', (done) => {
             })
         )
     });
-    // test('dateRangeToBlockHash (targettime == blocktime)', () =>  {
-    //      let starttime = 1438825753; // 368590 Wed Aug  5 18:49:13 PDT 2015
-    //      let endtime =   1438830991;  //368596 Wed Aug  5 20:16:32 PDT 2015
-    //      var blockhashArr = bulkchain.dateRangeToBlockHash(starttime, endtime);
-    //      return expect(blockhashArr).to.eventually.have.length(6);
-    // });
+    test('dateRangeToBlockHash (targettime == blocktime)', () =>  {
+         let starttime = 1438825753; // 368590 Wed Aug  5 18:49:13 PDT 2015
+         let endtime =   1438830991;  //368596 Wed Aug  5 20:16:32 PDT 2015
+         var blockHashArr = []
+         return ( 
+             Promise.each(bulkchain.dateRangeToBlockHash(starttime, endtime), function(blockhash) {
+                 blockHashArr.push(blockhash);
+                 if ( blockHashArr.length === 6 ) {
+                     expect (blockHashArr[0]).to.equal('0000000000000000067c05b9336127c1c83e31ba8bee032d2b0f3e62b486065a');
+                     expect (blockHashArr[5]).to.equal('0000000000000000015a8586aed07634f9f0397756914232bd6deea3643ddc27');
+                 }
+             })
+         )
+         //return expect(blockhashArr).to.have.length(6);
+    });
     // test('dateRangeToBlockHash (time trial 1 day)', () =>  {
     //      let starttime = 1436943600;
     //      // date -j -f %Y%m%d%H%M%S 20150715000000 +%s
