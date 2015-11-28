@@ -46,18 +46,15 @@ suite('bulkchain:', (done) => {
             })
         )
     });
-    // test('timeToBlockCount (targettime == blocktime)', () =>  {
-    //     let targettime = 1438656758;
-    //     return (
-    //         Promise.any(bulkchain.timeToBlockCount(targettime))
-    //         .then((blockcount) => expect(blockcount).to.equal(368329))
-    //     )
-    // });
-    // test('timeToBlockCount (targettime != blocktime)', () =>  {
-    //     let targettime = 1438656757;
-    //     var blockcount = bulkchain.timeToBlockCount(targettime);
-    //     return expect(blockcount).to.eventually.equal(368329);
-    // });
+    test('timeToBlockCount (targettime != blocktime)', () =>  {
+        let targettime = 1438656757;
+        return (
+            bulkchain.timeToBlockCount(targettime)
+            .then((blockcount) => {
+                expect(blockcount).to.equal(368329)
+            })
+        )
+    });
     // test('dateRangeToBlockHash (targettime == blocktime)', () =>  {
     //      let starttime = 1438825753; // 368590 Wed Aug  5 18:49:13 PDT 2015
     //      let endtime =   1438830991;  //368596 Wed Aug  5 20:16:32 PDT 2015
