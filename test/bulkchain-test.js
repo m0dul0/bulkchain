@@ -85,9 +85,9 @@ suite('bulkchain:', (done) => {
              })
          )
     });
-    test('txidToOutputArr (magic)', () =>  {
+    test('txidToOutput (magic)', () =>  {
         let txid = '25d4deffa4ac3b239565804decdde7c91eae489330a746ea486a3e0bdb3214b0';
-        bulkchain.txidToOutputArr(txid).then( function(output) {
+        bulkchain.txidToOutput(txid).then( function(output) {
             return expect(output.destroy_starttime).to.equal(1437325438);
         })
          
