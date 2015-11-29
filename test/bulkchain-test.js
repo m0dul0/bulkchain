@@ -58,7 +58,7 @@ suite('bulkchain:', (done) => {
          let starttime = 1438825753; // 368590 Wed Aug  5 18:49:13 PDT 2015
          let endtime =   1438830991;  //368596 Wed Aug  5 20:16:32 PDT 2015
          var blockHashArr = []
-         return ( 
+         return (
              Promise.each(bulkchain.dateRangeToBlockHash(starttime, endtime), function(blockhash) {
                  blockHashArr.push(blockhash);
                  if ( blockHashArr.length === 6 ) {
@@ -67,22 +67,32 @@ suite('bulkchain:', (done) => {
                  }
              })
          )
-         //return expect(blockhashArr).to.have.length(6);
     });
-    // test('dateRangeToBlockHash (time trial 1 day)', () =>  {
-    //      let starttime = 1436943600;
-    //      // date -j -f %Y%m%d%H%M%S 20150715000000 +%s
-    //      let endtime =   1437030000;
-    //      // date -j -f %Y%m%d%H%M%S 20150716000000 +%s
-    //      var blockhashArr = bulkchain.dateRangeToBlockHash(starttime, endtime);
-    //      return expect(blockhashArr).to.eventually.have.length(160);
-    // });
-    // test('txidToOutputArr (magic)', () =>  {
-    //      let txid = '25d4deffa4ac3b239565804decdde7c91eae489330a746ea486a3e0bdb3214b0';
-    //      var outputArrLength = bulkchain.txidToOutputArr(txid)
-    //          .then((outputArr) => outputArr.vout.length);
-    //      return expect(outputArrLength).to.eventually.equal(200);
-    // });
+    test('dateRangeToBlockHash (targettime == blocktime)', () =>  {
+         let starttime = 1436943600;
+         // date -j -f %Y%m%d%H%M%S 20150715000000 +%s
+         let endtime =   1437030000;
+         // date -j -f %Y%m%d%H%M%S 20150716000000 +%s
+         var blockHashArr = []
+         return (
+             Promise.each(bulkchain.dateRangeToBlockHash(starttime, endtime), function(blockhash) {
+                 blockHashArr.push(blockhash);
+                 if ( blockHashArr.length === 160 ) {
+                     expect (blockHashArr[0]).to.equal('000000000000000012d5e815d36764cc0c7d7e2b0f7716af92c285aebe40eeed');
+                     expect (blockHashArr[159]).to.equal('00000000000000000a8a1e247226a15b3c055ab3e3f13a12e351b6680aadaa15');
+                 }
+
+             })
+         )
+    });
+    test('txidToOutputArr (magic)', () =>  {
+        let txid = '25d4deffa4ac3b239565804decdde7c91eae489330a746ea486a3e0bdb3214b0';
+        bulkchain.txidToOutputArr(txid).then( function(output) {
+            return expect(output.destroy_starttime).to.equal(1437325438);
+        })
+         
+         //bulkchain.txidToOutputArr(txid)
+       });  
     // test('txidToInputItem (magic)', () =>  {
     //     let txid = '25d4deffa4ac3b239565804decdde7c91eae489330a746ea486a3e0bdb3214b0';
     //     let n = 91;
