@@ -123,8 +123,10 @@ suite('bulkchain:', (done) => {
     });
     test('rawTransactionToTransactionSignature (echo txid for block reward)', () =>  {
         let rawtransaction = JSON.parse ('{"hex":"01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff49037fb105062f503253482ffabe6d6d7efe4cd94e8c84846fd9c2cccf21123625ae5335024f1e3ea2fbf826d2f9077001000000000000002368030043a66110d55b002f736c7573682f0000000001bb2d0496000000001976a9147c154ed1dc59609e3d26abb2df2ea3d587cd8c4188ac00000000","txid":"4324c8719f8fdb1d13416cc1de3615431d7a9aa42fe71e2a24744d923a8fa77b","version":1,"locktime":0,"vin":[{"coinbase":"037fb105062f503253482ffabe6d6d7efe4cd94e8c84846fd9c2cccf21123625ae5335024f1e3ea2fbf826d2f9077001000000000000002368030043a66110d55b002f736c7573682f","sequence":0}],"vout":[{"value":25.16856251,"n":0,"scriptPubKey":{"asm":"OP_DUP OP_HASH160 7c154ed1dc59609e3d26abb2df2ea3d587cd8c41 OP_EQUALVERIFY OP_CHECKSIG","hex":"76a9147c154ed1dc59609e3d26abb2df2ea3d587cd8c4188ac","reqSigs":1,"type":"pubkeyhash","addresses":["1CK6KHY6MHgYvmRQ4PAafKYDrg1ejbH1cE"]}}],"blockhash":"00000000000000000a276100df16b2e39d8fc8af2be496b99d03b9e8e34ff35f","confirmations":7256,"time":1441453244,"blocktime":1441453244}')
-        var transactionSignature = bulkchain.rawTransactionToTransactionSignature(rawtransaction)
-        return expect(transactionSignature.txid).to.equal("4324c8719f8fdb1d13416cc1de3615431d7a9aa42fe71e2a24744d923a8fa77b");
+        bulkchain.rawTransactionToTransactionSignature(rawtransaction)
+        .then(function(transactionSignature) {
+            return expect(transactionSignature.txid).to.equal("4324c8719f8fdb1d13416cc1de3615431d7a9aa42fe71e2a24744d923a8fa77b");
+        })
     });
     //
     // test('rawTransactionTransactionSignature (echo txid for non-reward transaction)', () =>  {
