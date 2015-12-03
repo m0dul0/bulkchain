@@ -1,3 +1,5 @@
+# cat transactionsignature.json | jq -f -s jq/summary_blockhash.jq
+
 group_by(.txid)
 | map({
     "txid": .[0].txid ,

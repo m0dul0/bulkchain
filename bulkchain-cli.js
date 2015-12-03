@@ -4,6 +4,7 @@
 
 var yargs = require('yargs');
 var bulkchain = require(process.cwd() + '/lib/bulkchain.js');
+var Promise = require('bluebird'); // jshint ignore:line
 
 var argv = yargs
     .usage('\nUsage: $0 <command> [options]')
@@ -48,7 +49,7 @@ var argv = yargs
               }
           })
           .demand('startdate', 'enddate')
-          .example('$0 dateRangeToTransactionSignature --startdate `date -j -f %Y%m%d%H%M%S 20150701000000 +%s` --enddate `date -j -f %Y%m%d%H%M%S 20150702000000 +%s`', 'get all blockhashes on July 1 local timezone')
+          .example('$0 datetotransactionsignature --startdate `date -j -f %Y%m%d%H%M%S 20150701000000 +%s` --enddate `date -j -f %Y%m%d%H%M%S 20150702000000 +%s`', 'get all blockhashes on July 1 local timezone')
           .help('help')
           .argv;
       })
@@ -77,10 +78,9 @@ if (argv._[0] === 'datetoblockhash') {
 }
 
 if (argv._[0] === 'datetotransactionsignature') {
-    var iterator = bulkchain.dateRangeToTransactionSignature(argv.startdate, argv.enddate);
-    var signatureItem = iterator.next();
-    while ( signatureItem.done === false ) {
-        console.log(JSON.stringify(signatureItem));
-        signatureItem = iterator.next();
-    }
+    let starttime = argv.startdate; // 368590 Wed Aug  5 18:49:13 PDT 2015
+    let endtime =   argv.enddate;  //368596 Wed Aug  5 20:16:32 PDT 2015
+    for (let transactionsignature of bulkchain.dateRangeToTransactionSignature( starttime, endtime)) {
+        console.log({'transactionsignature': transactionsignature});
+    };
 }
