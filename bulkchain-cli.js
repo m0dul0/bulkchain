@@ -60,9 +60,6 @@ var argv = yargs
     .epilog('Help on commands:\nm0dul0: ./bulkchain-cli.js --help <command>')
     .argv;
 
-
-//console.dir(argv._)
-
 var shipOutput = function logToConsole (err, console_output) {
     console.log(JSON.stringify(console_output));
 };
@@ -81,6 +78,9 @@ if (argv._[0] === 'datetotransactionsignature') {
     let starttime = argv.startdate; // 368590 Wed Aug  5 18:49:13 PDT 2015
     let endtime =   argv.enddate;  //368596 Wed Aug  5 20:16:32 PDT 2015
     for (let transactionsignature of bulkchain.dateRangeToTransactionSignature( starttime, endtime)) {
-        console.log({'transactionsignature': transactionsignature});
+        var signature = Promise.resolve(transactionsignature);
+        signature.then(function(sig) {
+            console.log("$$$", sig, '$$$');
+        })
     };
 }
