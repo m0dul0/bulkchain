@@ -80,7 +80,7 @@ if (argv._[0] === 'datetotransactionsignature') {
     for (let transactionsignature of bulkchain.dateRangeToTransactionSignature( starttime, endtime)) {
         var signature = Promise.resolve(transactionsignature);
         signature.then(function(sig) {
-            console.log("$$$", sig, '$$$');
+            console.log(JSON.stringify(sig));
         })
     };
 }
