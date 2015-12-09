@@ -18,13 +18,6 @@ suite('bulkchain:', (done) => {
         });
     };
     
-    test('blockCountToTime (magic)', () =>  {
-        let blockcount = 367640;
-        return (
-            Promise.any(bulkchain.blockCountToTime(blockcount))
-            .then((blocktime) => expect(blocktime.time).to.equal(1438263884))
-        )
-    });
     test('timeToBlockCount (pre-genesis)', () =>  {
         let targettime = 100;
         return (
@@ -92,12 +85,6 @@ suite('bulkchain:', (done) => {
              })
          )
     });
-    test('txidToOutput (magic)', () =>  {
-        let txid = '25d4deffa4ac3b239565804decdde7c91eae489330a746ea486a3e0bdb3214b0';
-        bulkchain.txidToOutput(txid).then( function(output) {
-            return expect(output.destroy_starttime).to.equal(1437325438);
-        })
-    });
     test('txidToInputItem (magic)', () =>  {
         let txid = '25d4deffa4ac3b239565804decdde7c91eae489330a746ea486a3e0bdb3214b0';
         let n = 91;
@@ -128,12 +115,12 @@ suite('bulkchain:', (done) => {
             return expect(inputitem[0]).to.equal(undefined);
         })
     });
-    test('rawTransactionToTransactionSignature (echo txid for block reward)', () =>  {
-        let rawtransaction = JSON.parse ('{"hex":"01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff49037fb105062f503253482ffabe6d6d7efe4cd94e8c84846fd9c2cccf21123625ae5335024f1e3ea2fbf826d2f9077001000000000000002368030043a66110d55b002f736c7573682f0000000001bb2d0496000000001976a9147c154ed1dc59609e3d26abb2df2ea3d587cd8c4188ac00000000","txid":"4324c8719f8fdb1d13416cc1de3615431d7a9aa42fe71e2a24744d923a8fa77b","version":1,"locktime":0,"vin":[{"coinbase":"037fb105062f503253482ffabe6d6d7efe4cd94e8c84846fd9c2cccf21123625ae5335024f1e3ea2fbf826d2f9077001000000000000002368030043a66110d55b002f736c7573682f","sequence":0}],"vout":[{"value":25.16856251,"n":0,"scriptPubKey":{"asm":"OP_DUP OP_HASH160 7c154ed1dc59609e3d26abb2df2ea3d587cd8c41 OP_EQUALVERIFY OP_CHECKSIG","hex":"76a9147c154ed1dc59609e3d26abb2df2ea3d587cd8c4188ac","reqSigs":1,"type":"pubkeyhash","addresses":["1CK6KHY6MHgYvmRQ4PAafKYDrg1ejbH1cE"]}}],"blockhash":"00000000000000000a276100df16b2e39d8fc8af2be496b99d03b9e8e34ff35f","confirmations":7256,"time":1441453244,"blocktime":1441453244}')
-        bulkchain.rawTransactionToTransactionSignature(rawtransaction)
-        .then(function(transactionSignature) {
-            return expect(transactionSignature.txid).to.equal("4324c8719f8fdb1d13416cc1de3615431d7a9aa42fe71e2a24744d923a8fa77b");
-        })
+    test('txidToTransactionSignature (echo txid for block reward)', () =>  {
+        //let rawtransaction = JSON.parse ('{"hex":"01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff49037fb105062f503253482ffabe6d6d7efe4cd94e8c84846fd9c2cccf21123625ae5335024f1e3ea2fbf826d2f9077001000000000000002368030043a66110d55b002f736c7573682f0000000001bb2d0496000000001976a9147c154ed1dc59609e3d26abb2df2ea3d587cd8c4188ac00000000","txid":"4324c8719f8fdb1d13416cc1de3615431d7a9aa42fe71e2a24744d923a8fa77b","version":1,"locktime":0,"vin":[{"coinbase":"037fb105062f503253482ffabe6d6d7efe4cd94e8c84846fd9c2cccf21123625ae5335024f1e3ea2fbf826d2f9077001000000000000002368030043a66110d55b002f736c7573682f","sequence":0}],"vout":[{"value":25.16856251,"n":0,"scriptPubKey":{"asm":"OP_DUP OP_HASH160 7c154ed1dc59609e3d26abb2df2ea3d587cd8c41 OP_EQUALVERIFY OP_CHECKSIG","hex":"76a9147c154ed1dc59609e3d26abb2df2ea3d587cd8c4188ac","reqSigs":1,"type":"pubkeyhash","addresses":["1CK6KHY6MHgYvmRQ4PAafKYDrg1ejbH1cE"]}}],"blockhash":"00000000000000000a276100df16b2e39d8fc8af2be496b99d03b9e8e34ff35f","confirmations":7256,"time":1441453244,"blocktime":1441453244}')
+        let txid = ['4324c8719f8fdb1d13416cc1de3615431d7a9aa42fe71e2a24744d923a8fa77b'];
+        transactionsignature = bulkchain.txidToTransactionSignature(txid);
+        console.log(transactionsignature.then((transactionsignature) => transactionsignature));
+        return expect(transactionsignature.then()).to.equal("4324c8719f8fdb1d13416cc1de3615431d7a9aa42fe71e2a24744d923a8fa77b");
     });
     test('rawTransactionTransactionSignature (echo txid for non-reward transaction)', () =>  {
         let rawtransaction = JSON.parse('{"hex":"0100000003b01432db0b3e6a48ea46a7309348ae1ec9e7ddec4d806595233baca4ffded4255b0000006b483045022100f176844ba296ca4a2a2383d400fa1ce4f5269528be809efb605682978faaee3d02207f868790bc52255ac0852b82347fcd8a1965488ef7b8f8514f9b485e3d4d63be0121020ab80fad8e873ea6450af1d90f3d8dd503b66cccae5861fe9b7292445bbc2b13ffffffffc572eda0356de9ac7cea8ac260b8f2e2097a9259f996bf569c9b73b9899d8080030000006a4730440220416ee7708cd97d6a888809d1fe4c56f3a765095de2ffa978cd8232ba45baf74d0220071f9ca88da49ca865aedf7f68cbd17252040f2d9285984585c40e354096df410121020ab80fad8e873ea6450af1d90f3d8dd503b66cccae5861fe9b7292445bbc2b13ffffffff4a696bbb8a6d4ce591fc98fda34ba951de6da926f990a8d2e8b99150b0ca8167060000006c493046022100b9a3078d1ee15f4e9f5202a1907e5087ceb3073c2404ed3c87d4bfd12dd7e474022100dcfa89d860f5ba6d74b3b817073c96c693cd1e4494daf082c1497456207e8a0b0121020ab80fad8e873ea6450af1d90f3d8dd503b66cccae5861fe9b7292445bbc2b13ffffffff02841d0000000000001976a91439ccc048204e05347a96a1b29aac0678967e830f88ace6bf3800000000001976a914b3f2fea1670d19b4e12dd575d82a49c1a35904fa88ac00000000","txid":"ed9f0b40ff4cbde454ebb1664fc4d33285525883618e17ea4f6b1406ff420258","version":1,"locktime":0,"vin":[{"txid":"25d4deffa4ac3b239565804decdde7c91eae489330a746ea486a3e0bdb3214b0","vout":91,"scriptSig":{"asm":"3045022100f176844ba296ca4a2a2383d400fa1ce4f5269528be809efb605682978faaee3d02207f868790bc52255ac0852b82347fcd8a1965488ef7b8f8514f9b485e3d4d63be01 020ab80fad8e873ea6450af1d90f3d8dd503b66cccae5861fe9b7292445bbc2b13","hex":"483045022100f176844ba296ca4a2a2383d400fa1ce4f5269528be809efb605682978faaee3d02207f868790bc52255ac0852b82347fcd8a1965488ef7b8f8514f9b485e3d4d63be0121020ab80fad8e873ea6450af1d90f3d8dd503b66cccae5861fe9b7292445bbc2b13"},"sequence":4294967295},{"txid":"80809d89b9739b9c56bf96f959927a09e2f2b860c28aea7cace96d35a0ed72c5","vout":3,"scriptSig":{"asm":"30440220416ee7708cd97d6a888809d1fe4c56f3a765095de2ffa978cd8232ba45baf74d0220071f9ca88da49ca865aedf7f68cbd17252040f2d9285984585c40e354096df4101 020ab80fad8e873ea6450af1d90f3d8dd503b66cccae5861fe9b7292445bbc2b13","hex":"4730440220416ee7708cd97d6a888809d1fe4c56f3a765095de2ffa978cd8232ba45baf74d0220071f9ca88da49ca865aedf7f68cbd17252040f2d9285984585c40e354096df410121020ab80fad8e873ea6450af1d90f3d8dd503b66cccae5861fe9b7292445bbc2b13"},"sequence":4294967295},{"txid":"6781cab05091b9e8d2a890f926a96dde51a94ba3fd98fc91e54c6d8abb6b694a","vout":6,"scriptSig":{"asm":"3046022100b9a3078d1ee15f4e9f5202a1907e5087ceb3073c2404ed3c87d4bfd12dd7e474022100dcfa89d860f5ba6d74b3b817073c96c693cd1e4494daf082c1497456207e8a0b01 020ab80fad8e873ea6450af1d90f3d8dd503b66cccae5861fe9b7292445bbc2b13","hex":"493046022100b9a3078d1ee15f4e9f5202a1907e5087ceb3073c2404ed3c87d4bfd12dd7e474022100dcfa89d860f5ba6d74b3b817073c96c693cd1e4494daf082c1497456207e8a0b0121020ab80fad8e873ea6450af1d90f3d8dd503b66cccae5861fe9b7292445bbc2b13"},"sequence":4294967295}],"vout":[{"value":7.556e-05,"n":0,"scriptPubKey":{"asm":"OP_DUP OP_HASH160 39ccc048204e05347a96a1b29aac0678967e830f OP_EQUALVERIFY OP_CHECKSIG","hex":"76a91439ccc048204e05347a96a1b29aac0678967e830f88ac","reqSigs":1,"type":"pubkeyhash","addresses":["16GcoHqFaCKjZDyUDmKZuvKYEzfdhBRuBD"]}},{"value":0.03719142,"n":1,"scriptPubKey":{"asm":"OP_DUP OP_HASH160 b3f2fea1670d19b4e12dd575d82a49c1a35904fa OP_EQUALVERIFY OP_CHECKSIG","hex":"76a914b3f2fea1670d19b4e12dd575d82a49c1a35904fa88ac","reqSigs":1,"type":"pubkeyhash","addresses":["1HQV3uK7n7o4Y41Qt3sjHaeLZfB9tp7JUM"]}}],"blockhash":"0000000000000000031d1a8126295bd342a4948890f0411e541910aabc8437b5","confirmations":1,"time":1438888798,"blocktime":1438888798}')
@@ -169,15 +156,15 @@ suite('bulkchain:', (done) => {
             })
         console.log(i);
         // Outputs '16'
-            .then(function(signatureArr) {
-                signatureArr.map(function(signaturePromise) {
-                    signaturePromise.then(function(signature) {
-                        console.log(signature);
-                        return signature
-                    })
-                })
-                return signatureArr[0]
-            });
+            // .then(function(signatureArr) {
+            //     signatureArr.map(function(signaturePromise) {
+            //         signaturePromise.then(function(signature) {
+            //             console.log(signature);
+            //             return signature
+            //         })
+            //     })
+            //     return signatureArr[0]
+            // });
         return expect(promiseSignatureArr_zero).to.eventually.not.equal(undefined);
    });
 })

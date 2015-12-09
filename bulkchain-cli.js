@@ -77,10 +77,6 @@ if (argv._[0] === 'datetoblockhash') {
 if (argv._[0] === 'datetotransactionsignature') {
     let starttime = argv.startdate; // 368590 Wed Aug  5 18:49:13 PDT 2015
     let endtime =   argv.enddate;  //368596 Wed Aug  5 20:16:32 PDT 2015
-    for (let transactionsignature of bulkchain.dateRangeToTransactionSignature( starttime, endtime)) {
-        var signature = Promise.resolve(transactionsignature);
-        signature.then(function(sig) {
-            console.log(JSON.stringify(sig));
-        })
-    };
+    var consolelogger = function(textoutput) { console.log(textoutput) };
+    Promise.join(starttime, endtime, consolelogger, bulkchain.dateRangeToTransactionSignature( starttime, endtime, consolelogger));
 }
